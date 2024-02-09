@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
+   <!-- Include Video.js Overlay Plugin CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-overlay@3.1.0/dist/videojs-overlay.min.css">
+    <style>
+        .video-container {
+         max-width: 80%;
+         max-height: 80%;
+         overflow: hidden;
+        }
+    </style>
+<body>
+   <div class="video-container">
+      <video
+         id="my-video"
+         class="video-js vjs-big-play-centered vjs-theme-sea"
+         controls
+         preload="auto"
+         fluid="true"
+         poster="https://www.tutorialspoint.com/videos/sample.png"
+         data-setup='{}'
+      >
+      </video>
+   </div>
+   <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+   <!-- Include Video.js Overlay Plugin JS -->
+   <script src="https://cdn.jsdelivr.net/npm/videojs-overlay@3.1.0/dist/videojs-overlay.min.js"></script>   <script>
+      var player = videojs('my-video', {
+         fluid: true // Make the player fit the container
+      });
+      player.src({
+         src: 'http://localhost:5000/hls/stream.m3u8',
+         type: 'application/x-mpegURL'
+      });
+
+      const overlay = player.overlay({
+        content: 'Default overlay content',
+        debug: true,
+        overlays: [{
+          content: 'The video is playing!',
+          start: 'play',
+          end: 'pause'
+        }]
+      });
+      // const addedOverlays = overlay.add({content: "this is a new one", start: "play", end: "pause"});
+      console.log(addedOverlays,"success");
+   </script>
+</body>
+</html>
